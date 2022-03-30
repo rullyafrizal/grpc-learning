@@ -146,6 +146,8 @@ Contoh:
 -  Server bisa menunggu client selesai kirim streamed messagenya sebelum nulis message buat responsenya.
 -  Server bisa bermain `ping-pong` dengan client, yang artinya setiap ada request dari client, server langsung kirim balik response-nya, begitu seterusnya.
 
+### Istilah-istilah
+
 #### Deadline/Timeout
 - Client bisa menentukan seberapa lama mereka harus menunggu untuk mendapatkan reponse dari server sebelum RPC call dihentikan dengan error `DEADLINE_EXCEEDED`. Di sisi server, server bisa melihat apakah sebuah RPC memiliki time out, atau berapa sisa waktu untuk menyelesaikan sebauh RPC call.
 
