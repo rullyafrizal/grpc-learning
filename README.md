@@ -57,5 +57,37 @@
 - Di sisi server, server sendiri mengimplementasikan interface dan menjalankan gRPC server guna menghandle request atau call dari client
 - Di sisi client, client punya stub yang menyediakan method yang sama dengan yang ada di sisi server
 
-## Sekilas Tentang Protocol Buffer
-## Core Concepts, Architecture, and Lifecycle
+### Sekilas Tentang Protocol Buffer
+- Protocol Buffers adalah sebuah mekanisme untuk serialisasi data terstruktur yang bersifat language dan platform neutral.
+- Protocol Buffers mirip dengan konsep XML tetapi lebih kecil dalam hal ukuran, lebih cepat, dan lebih sederhana
+- Secara default, gRPC menggunakan **protocol buffers** sebagai serializer, meski kita bisa menggunakan JSON.
+
+#### Contoh Sederhana Protocol Buffers
+- Data dari protocol buffers terstruktur dalam bentuk message
+```
+message Person {
+  string name = 1;
+  int32 id = 2;
+  bool has_ponycopter = 3;
+}
+```
+- Representasi dari message akan berbeda tiap bahasa pemrograman, misal di Go akan menjadi struct, di C++ akan menjadi Class, dsb.
+- Define gRPC services dengan method RPC parameter dan return value sebagai message
+```
+// The greeter service definition.
+service Greeter {
+  // Sends a greeting
+  rpc SayHello (HelloRequest) returns (HelloReply) {}
+}
+
+// The request message containing the user's name.
+message HelloRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings
+message HelloReply {
+  string message = 1;
+}
+```
+### Core Concepts, Architecture, and Lifecycle
