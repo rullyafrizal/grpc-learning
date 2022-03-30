@@ -110,9 +110,16 @@ message HelloResponse {
 
 ### Jenis Service Method
 - **Unary RPC**: Method yang hanya mengirimkan satu request ke server dan mendapatkan satu repsonse, seperti function pada umumnya.
+![Diagram Unary](/img/unary.png)
+
 - **Server Streaming RPC**: Method yang mengirimkan sebuah request ke server dan mendapatkan return value dari server berbentuk stream data yang artinya data dikirimkan secara sequential (tidak langsung semua, dipisah-pisah dan diurutkan). Client akan terus membaca data stream hingga sudah tidak ada data untuk dibaca. gRPC menjamin urutan data yang dikirimkan pada tiap-tiap RPC call.
+![Diagram SS](/img/server-streaming.png)
+
 - **Client Streaming RPC**: Method yang mengirimkan request atau message secara sequential dengan menggunakan stream yang sudah disediakan. Setelah selesai mengirim message, client akan menunggu server untuk membaca data dan mengembalikan response. Lagi-lagi gRPC menjamin urutan data yang dikirimkan pada tiap-tiap RPC call.
+![Diagram CS](/img/client-streaming.png)
+
 - **Bidirectional Streaming RPC**: Method yang keduanya (server dan client) sama-sama mengirimkan data berbentuk read-write stream secara sequential. Stream antara server dan client ini beroperasi secara independen, sehingga client dan sevrer bisa read dan write data tidak harus secara urut, atau bisa juga dikasih SOP seperti read message dahulu, lalu write message. Urutan dari message akan tetap diperhatikan oleh gRPC.
+![Diagram BS](img/bidirectional.png)
 
 ### Using the API
 Dimulai dari service definition dalam sebuah `.proto` file, gRPC menyediakan compiler untuk protocol buffer yang akan men-generate client dan server code. Biasanya pengguna gRPC memanggil API ini di sisi client dan mengimplementasikannya di sisi server.
